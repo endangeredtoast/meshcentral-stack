@@ -1,0 +1,27 @@
+version: '3'
+services:
+    db:
+        restart: always
+        image: mongo:latest
+#        expose:
+#            - 27017
+        volumes:
+            - ./meshcentral/mongodatabase:/data/db
+    app:
+        restart: always
+        depends_on:
+            - 'db'
+        image: typhonragewind/meshcentral:mongodb
+        ports:
+            - 8086:443 #MeshCentral will moan and try everything not to use port 80, but you can also use it if you so desire, just change the config.json according to your needs
+        environment:
+            - HOSTNAME=${HOSTNAME:?err}
+            - REVERSE_PROXY=${REVERSE_PROXY_IP:-false}
+            - REVERSE_PROXY_TLS_PORT=${PUBLIC_PORT:-443}
+            - IFRAME=true
+            - ALLOW_NEW_ACCOUNTS=false
+            - WEBRTC=true
+            - NODE_ENV=production
+        volumes:
+            - ./meshcentral/data:/opt/meshcentral/meshcentral-data
+            - ./meshcentral/user_files:/opt/meshcentral/meshcentral-files
