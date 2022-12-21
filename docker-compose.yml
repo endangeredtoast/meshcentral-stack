@@ -13,13 +13,13 @@ services:
             - 'db'
         image: typhonragewind/meshcentral:mongodb
         ports:
-            - 8086:443 #MeshCentral will moan and try everything not to use port 80, but you can also use it if you so desire, just change the config.json according to your needs
+            - ${PORT:-8086}:443 #MeshCentral will moan and try everything not to use port 80, but you can also use it if you so desire, just change the config.json according to your needs
         environment:
             - HOSTNAME=${HOSTNAME:?err}
             - REVERSE_PROXY=${REVERSE_PROXY_IP:-false}
             - REVERSE_PROXY_TLS_PORT=${PUBLIC_PORT:-443}
             - IFRAME=true
-            - ALLOW_NEW_ACCOUNTS=false
+            - ALLOW_NEW_ACCOUNTS=${ALLOW_NEW_ACCOUNTS:-false}
             - WEBRTC=true
             - NODE_ENV=production
         volumes:
