@@ -1,0 +1,2 @@
+# meshcentral-stack
+MeshCentral
