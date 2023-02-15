@@ -16,7 +16,7 @@ services:
             - 'mongodb'
         image: typhonragewind/meshcentral:mongodb
         ports:
-            - 8086:443 #MeshCentral will moan and try everything not to use port 80, but you can also use it if you so desire, just change the config.json according to your needs
+            - ${HTTPS_PORT}:443 #MeshCentral will moan and try everything not to use port 80, but you can also use it if you so desire, just change the config.json according to your needs
         links:
             - mongodb
         volumes:
