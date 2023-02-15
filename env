@@ -1,4 +1,4 @@
-HOSTNAME=mesh.tinkervalley.ca
+HOSTNAME=your.domain
 REVERSE_PROXY=true
 REVERSE_PROXY_TLS_PORT=443
 HTTPS_PORT=8086
